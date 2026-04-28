@@ -1,0 +1,27 @@
+::1 - - [27/Apr/2026 17:12:23] code 404, message File not found
+::1 - - [27/Apr/2026 17:12:23] "GET /health HTTP/1.1" 404 -
+::1 - - [27/Apr/2026 17:16:53] code 404, message File not found
+::1 - - [27/Apr/2026 17:16:53] "GET /health HTTP/1.1" 404 -
+::1 - - [27/Apr/2026 17:25:02] code 404, message File not found
+::1 - - [27/Apr/2026 17:25:02] "HEAD /v1 HTTP/1.1" 404 -
+----------------------------------------
+Exception occurred during processing of request from ('::ffff:127.0.0.1', 63218, 0, 0)
+Traceback (most recent call last):
+  File "C:\Users\rysok\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\rysok\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 1310, in finish_request
+    self.RequestHandlerClass(request, client_address, self,
+  File "C:\Users\rysok\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 671, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\Users\rysok\AppData\Local\Programs\Python\Python311\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\rysok\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\rysok\AppData\Local\Programs\Python\Python311\Lib\http\server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rysok\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+----------------------------------------
