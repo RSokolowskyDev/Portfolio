@@ -409,7 +409,11 @@ footer{border-top:1px solid var(--bdr);padding:40px 52px;text-align:center;max-w
     <div class="sec-lbl">// 03 — Toolkit</div>
     <h2 class="sec-h">Technical <em>Skills</em></h2>
     <p class="skills-intro">Full-stack across the AI pipeline — from LLM orchestration and prompt engineering to hardware firmware and cloud infrastructure.</p>
-    <canvas id="skills-canvas" style="display:block;margin:40px auto;max-width:100%;height:600px;cursor:grab;border-radius:12px;"></canvas>
+    <div class="skills-canvas-wrap" style="position:relative; width:100%; display:flex; justify-content:center; margin-top:20px;">
+      <canvas id="skills-canvas" width="720" height="720"
+        style="max-width:100%; cursor:default; transform-style:preserve-3d; transition:transform 0.15s ease; display:block; border-radius:12px;">
+      </canvas>
+    </div>
   </div>
 </section>
 
@@ -463,161 +467,347 @@ const PROJECTS = [
 ];
 
 const SKILLS_DATA = [
-  {name:'Python',color:'#3366A0',skills:['AI/ML','Automation','CrewAI','FastAPI','Sentiment','Orchestration']},
-  {name:'JavaScript',color:'#F7DF1E',skills:['React','Node.js','Web Dev','Frontend','Next.js','ES6+']},
-  {name:'C++',color:'#00599C',skills:['Firmware','Hardware','Embedded','ArduPilot','Systems','Performance']},
-  {name:'AWS',color:'#FF9900',skills:['Cloud','Lambda','S3','EC2','Infrastructure','DevOps']},
-  {name:'SQL',color:'#CC2927',skills:['Databases','Firebase','Data','Queries','Backend','Analytics']},
-  {name:'Tools',color:'#888888',skills:['Git','Docker','Excel','Tableau','Excel','Design']}
+  {
+    id: 'center',
+    label: 'Full Stack\nAI Engineer',
+    color: '#ffffff',
+    textColor: '#0a0a0a',
+    emoji: '🧑‍💻',
+    skills: []
+  },
+  {
+    id: 'cloud',
+    label: 'Cloud &\nDevOps',
+    color: '#FF9900',
+    emoji: '☁️',
+    skills: [
+      { name: 'AWS Lambda',    emoji: 'λ'  },
+      { name: 'AWS EC2',       emoji: '⚙️' },
+      { name: 'AWS S3',        emoji: '🪣' },
+      { name: 'AWS API GW',    emoji: '🔀' },
+      { name: 'AWS Bedrock',   emoji: '🪨' },
+      { name: 'AWS DynamoDB',  emoji: '🗄️' },
+    ]
+  },
+  {
+    id: 'frontend',
+    label: 'Web &\nFrontend',
+    color: '#61DAFB',
+    emoji: '🎨',
+    skills: [
+      { name: 'React',               emoji: '⚛️' },
+      { name: 'HTML5',               emoji: '🌐' },
+      { name: 'CSS',                 emoji: '🎨' },
+      { name: 'JavaScript',          emoji: '⚡' },
+      { name: 'GitHub Pages',        emoji: '📄' },
+      { name: 'Web Hosting',         emoji: '🚀' },
+    ]
+  },
+  {
+    id: 'backend',
+    label: 'Backend\n& APIs',
+    color: '#a855f7',
+    emoji: '⚙️',
+    skills: [
+      { name: 'Python',              emoji: '🐍' },
+      { name: 'FastAPI',             emoji: '🚀' },
+      { name: 'Node.js',             emoji: '💚' },
+      { name: 'REST API Design',     emoji: '🔗' },
+      { name: 'Webhooks',            emoji: '🪝' },
+      { name: 'Render',              emoji: '🖥️' },
+    ]
+  },
+  {
+    id: 'ai',
+    label: 'AI & ML',
+    color: '#f472b6',
+    emoji: '🤖',
+    skills: [
+      { name: 'CrewAI',              emoji: '🤖' },
+      { name: 'Groq',                emoji: '⚡' },
+      { name: 'HuggingFace',         emoji: '🤗' },
+      { name: 'Prompt Engineering',  emoji: '✍️' },
+      { name: 'AI Orchestration',    emoji: '🧠' },
+      { name: 'LM Studio',           emoji: '🖥️' },
+    ]
+  },
+  {
+    id: 'databases',
+    label: 'Databases',
+    color: '#f87171',
+    emoji: '🗄️',
+    skills: [
+      { name: 'SQL',                 emoji: '📊' },
+      { name: 'Firebase',            emoji: '🔥' },
+      { name: 'JSON Modeling',       emoji: '📋' },
+      { name: 'CRUD Operations',     emoji: '🔄' },
+      { name: 'Query Optimization',  emoji: '🔍' },
+      { name: 'HTTP / REST Calls',   emoji: '📡' },
+    ]
+  },
+  {
+    id: 'tools',
+    label: 'Tools &\nInfrastructure',
+    color: '#34d399',
+    emoji: '🛠️',
+    skills: [
+      { name: 'Git / GitHub',        emoji: '🌿' },
+      { name: 'VS Code',             emoji: '💻' },
+      { name: 'Claude Code',         emoji: '🤖' },
+      { name: 'Tableau',             emoji: '📊' },
+      { name: 'Docker',              emoji: '🐳' },
+      { name: 'Postman',             emoji: '📮' },
+    ]
+  },
 ];
+
+const skillImages = {
+  'AWS Lambda': './images/AWS_Lambda.png',
+  'AWS EC2': './images/AWS_EC2.png',
+  'AWS S3': './images/AWS_S3.png',
+  'AWS DynamoDB': './images/AWS_DynamoDB.png',
+  'HTML5': './images/HTML.png',
+  'CSS': './images/CSS.png',
+  'Python': './images/Python.png',
+  'FastAPI': './images/FAST_api.png',
+  'Node.js': './images/Node.js.png',
+  'Render': './images/Render.png',
+  'CrewAI': './images/CrewAI.png',
+  'Groq': './images/Groq.png',
+  'HuggingFace': './images/HuggingFace.png',
+  'AI Orchestration': './images/AI_Orchestration.png',
+};
 
 function initSkillsCanvas(){
   const canvas = document.getElementById('skills-canvas');
   if(!canvas) return;
 
   const ctx = canvas.getContext('2d');
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = rect.width * window.devicePixelRatio;
-  canvas.height = rect.height * window.devicePixelRatio;
-  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  const w = canvas.width, h = canvas.height;
+  const centerX = w / 2, centerY = h / 2;
 
-  const w = rect.width, h = rect.height;
-  const centerX = w * 0.5, centerY = h * 0.5;
-
-  let isDragging = false, offset = {x:0, y:0}, targetOffset = {x:0, y:0};
-  let lastMouse = {x:0, y:0}, hoverSkill = null, time = 0;
-  const SPACING = 80, UNIVERSE_RADIUS = 380;
-
-  const bubbles = [];
-  const skillImages = {
-    'PYTHON': './images/python.jpg',
-    'JAVASCRIPT': './images/javascript.png',
-    'REACT': './images/react.png',
-    'NODE.JS': './images/node.js.png',
-    'AWS': './images/aws.png',
-    'HUGGINGFACE': './images/huggingface.png',
-    'C++': './images/cpp.png',
-    'COMPTIA': './images/comptia.png',
-    'HTML': './images/html.png',
-    'CSS': './images/css.jpg',
-    'FULL STACK': './images/python.jpg'
-  };
   const imageCache = {};
-  function loadImage(src) {
-    if (!imageCache[src]) {
+  function preloadImages(callback) {
+    const entries = Object.entries(skillImages);
+    if (entries.length === 0) { callback(); return; }
+    let loaded = 0;
+    entries.forEach(([key, src]) => {
       const img = new Image();
+      img.onload  = () => { imageCache[key] = img; loaded++; if (loaded === entries.length) callback(); };
+      img.onerror = () => {                          loaded++; if (loaded === entries.length) callback(); };
       img.src = src;
-      imageCache[src] = img;
-    }
-    return imageCache[src];
+    });
   }
-  Object.values(skillImages).forEach(src => loadImage(src));
 
-  function createHexCluster(baseX, baseY, color, name, skills) {
-    const axial = [{q:0,r:0},{q:1,r:0},{q:1,r:-1},{q:0,r:-1},{q:-1,r:0},{q:-1,r:1},{q:0,r:1}];
-    axial.forEach((coord, i) => {
-      const x = SPACING * (Math.sqrt(3) * coord.q + (Math.sqrt(3)/2) * coord.r);
-      const y = SPACING * (1.5 * coord.r);
-      bubbles.push({
-        name: (i === 0 ? name : skills[i-1] || '').toUpperCase(),
-        x: baseX + x, y: baseY + y,
-        color: color,
-        baseRadius: 45,
-        isHub: i === 0,
-        phase: Math.random() * Math.PI * 2
+  let time = 0;
+  let mouseX = centerX, mouseY = centerY;
+  let focusedHub = null;
+
+  // Build nodes from SKILLS_DATA
+  const nodes = [];
+  const nodeMap = {};
+
+  // Center node
+  const centerNode = {
+    id: 'center',
+    label: SKILLS_DATA[0].label,
+    color: SKILLS_DATA[0].color,
+    textColor: SKILLS_DATA[0].textColor,
+    emoji: SKILLS_DATA[0].emoji,
+    radius: 64,
+    x: centerX,
+    y: centerY,
+    phase: Math.random() * Math.PI * 2,
+    isHub: true,
+    skills: []
+  };
+  nodes.push(centerNode);
+  nodeMap['center'] = centerNode;
+
+  // Hub nodes (6 orbiting center)
+  const HUB_ORBIT_RADIUS = 180;
+  const HUB_COUNT = SKILLS_DATA.length - 1;
+  const hubs = [];
+  for (let i = 0; i < HUB_COUNT; i++) {
+    const data = SKILLS_DATA[i + 1];
+    const angle = (-90 + (i * 360 / HUB_COUNT)) * Math.PI / 180;
+    const hubNode = {
+      id: data.id,
+      label: data.label,
+      color: data.color,
+      emoji: data.emoji,
+      radius: 52,
+      x: centerX + Math.cos(angle) * HUB_ORBIT_RADIUS,
+      y: centerY + Math.sin(angle) * HUB_ORBIT_RADIUS,
+      phase: Math.random() * Math.PI * 2,
+      isHub: true,
+      skills: data.skills || [],
+      hubAngle: angle,
+      hubIndex: i
+    };
+    nodes.push(hubNode);
+    nodeMap[data.id] = hubNode;
+    hubs.push(hubNode);
+  }
+
+  // Satellite nodes (6 around each hub)
+  const SATELLITE_ORBIT_RADIUS = 100;
+  hubs.forEach((hub, hubIdx) => {
+    hub.skills.forEach((skill, skillIdx) => {
+      const angle = (-90 + (skillIdx * 360 / hub.skills.length)) * Math.PI / 180;
+      const sat = {
+        id: `${hub.id}-${skillIdx}`,
+        name: skill.name,
+        emoji: skill.emoji,
+        color: hub.color,
+        radius: 34,
+        x: hub.x + Math.cos(angle) * SATELLITE_ORBIT_RADIUS,
+        y: hub.y + Math.sin(angle) * SATELLITE_ORBIT_RADIUS,
+        phase: Math.random() * Math.PI * 2,
+        isHub: false,
+        parentHub: hub
+      };
+      nodes.push(sat);
+    });
+  });
+
+  // Mouse tracking
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+
+    // Check if hovering over a hub
+    focusedHub = null;
+    for (const hub of hubs) {
+      const dx = mouseX - hub.x, dy = mouseY - hub.y;
+      if (Math.sqrt(dx*dx + dy*dy) < 150) {
+        focusedHub = hub;
+        break;
+      }
+    }
+
+    // 3D tilt
+    const dx = (mouseX - centerX) / centerX;
+    const dy = (mouseY - centerY) / centerY;
+    canvas.style.transform = `perspective(1000px) rotateX(${-dy*8}deg) rotateY(${dx*8}deg)`;
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    focusedHub = null;
+    canvas.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+  });
+
+  function drawNode(node, alpha, scale) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(node.x, node.y);
+
+    // Filled circle
+    ctx.beginPath();
+    ctx.arc(0, 0, node.radius * scale, 0, Math.PI * 2);
+    ctx.fillStyle = node.color;
+    ctx.fill();
+
+    // Inner glow ring
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Image or emoji
+    const img = imageCache[node.name];
+    if (img) {
+      const imgSize = node.radius * scale * 1.3;
+      ctx.drawImage(img, -imgSize/2, -imgSize/2, imgSize, imgSize);
+    } else {
+      ctx.font = `${node.radius * scale * 0.9}px serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = node.color === '#ffffff' ? '#0a0a0a' : 'rgba(255,255,255,0.9)';
+      ctx.fillText(node.emoji, 0, 0);
+    }
+
+    // Label (below node, when visible)
+    if (alpha > 0.5 && node.label) {
+      ctx.font = `500 ${Math.max(9, node.radius * scale * 0.28)}px 'JetBrains Mono', monospace`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      const lines = node.label.split('\n');
+      lines.forEach((line, i) => {
+        ctx.fillText(line, 0, node.radius * scale + 8 + (i * 14));
       });
-    });
-  }
-
-  createHexCluster(0, 0, '#22d3ee', 'Full Stack', ['LLM','DevOps','ML','Full','Stack','Engineer']);
-  let angle = 30;
-  SKILLS_DATA.forEach(s => {
-    const x = Math.cos(angle * Math.PI / 180) * UNIVERSE_RADIUS;
-    const y = Math.sin(angle * Math.PI / 180) * UNIVERSE_RADIUS;
-    createHexCluster(x, y, s.color, s.name, s.skills);
-    angle += 60;
-  });
-
-  canvas.addEventListener('mousedown', e => {
-    isDragging = true;
-    lastMouse = {x: e.clientX, y: e.clientY};
-  });
-
-  window.addEventListener('mouseup', () => {
-    isDragging = false;
-    let closest = bubbles[0], minDist = Infinity;
-    bubbles.forEach(b => {
-      const d = Math.sqrt((b.x + offset.x)**2 + (b.y + offset.y)**2);
-      if(d < minDist) {minDist = d; closest = b;}
-    });
-    targetOffset = {x: -closest.x, y: -closest.y};
-  });
-
-  window.addEventListener('mousemove', e => {
-    if(isDragging) {
-      offset.x += e.clientX - lastMouse.x;
-      offset.y += e.clientY - lastMouse.y;
-      lastMouse = {x: e.clientX, y: e.clientY};
-      targetOffset = {...offset};
     }
-    let found = null;
-    bubbles.forEach(b => {
-      const relX = b.x + offset.x, relY = b.y + offset.y;
-      const dist = Math.sqrt(relX**2 + relY**2);
-      const scale = Math.max(0.15, 1 - dist / 500);
-      const drawX = centerX + relX * (1 - 0.22 * (1 - scale));
-      const drawY = centerY + relY * (1 - 0.22 * (1 - scale));
-      if(Math.sqrt((drawX - e.clientX)**2 + (drawY - e.clientY)**2) < b.baseRadius * scale) found = b;
-    });
-    hoverSkill = found;
-  });
+
+    ctx.restore();
+  }
 
   function draw() {
+    time += 0.0008;
     ctx.clearRect(0, 0, w, h);
-    time += 0.02;
 
-    if(!isDragging) {
-      offset.x += (targetOffset.x - offset.x) * 0.12;
-      offset.y += (targetOffset.y - offset.y) * 0.12;
-    }
-
-    bubbles.forEach(b => {
-      const relX = b.x + offset.x, relY = b.y + offset.y;
-      const centerDist = Math.sqrt(relX**2 + relY**2);
-      const scale = Math.max(0.08, 1 - centerDist / 500);
-      const pull = 0.25 * (1 - scale);
-      const drawX = centerX + relX * (1 - pull);
-      const drawY = centerY + relY * (1 - pull);
-
-      const breathing = Math.sin(time + b.phase) * 3 * scale;
-      const r = b.baseRadius * scale + breathing;
-
-      ctx.globalAlpha = Math.min(1, scale + 0.3);
+    // Draw connection lines
+    hubs.forEach(hub => {
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
-      ctx.fillStyle = b.color;
-      ctx.fill();
+      ctx.moveTo(centerNode.x, centerNode.y);
+      ctx.lineTo(hub.x, hub.y);
+      ctx.stroke();
 
-      if(b.isHub) {
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 2 * scale;
+      hub.skills.forEach((skill, idx) => {
+        const angle = (-90 + (idx * 360 / hub.skills.length)) * Math.PI / 180;
+        const satX = hub.x + Math.cos(angle) * SATELLITE_ORBIT_RADIUS;
+        const satY = hub.y + Math.sin(angle) * SATELLITE_ORBIT_RADIUS;
+        ctx.strokeStyle = `rgba(${parseInt(hub.color.slice(1,3),16)},${parseInt(hub.color.slice(3,5),16)},${parseInt(hub.color.slice(5,7),16)},0.2)`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(hub.x, hub.y);
+        ctx.lineTo(satX, satY);
         ctx.stroke();
+      });
+    });
+
+    // Draw nodes
+    nodes.forEach(node => {
+      const floatOffset = Math.sin(time + node.phase) * 0.4;
+      node.y += floatOffset;
+
+      let alpha, scale;
+      if (node.id === 'center') {
+        alpha = 0.85;
+        scale = 1;
+      } else if (node.isHub) {
+        if (focusedHub && focusedHub.id === node.id) {
+          alpha = 1;
+          scale = 1.1;
+        } else if (focusedHub) {
+          alpha = 0.15;
+          scale = 1;
+        } else {
+          alpha = 0.55;
+          scale = 1;
+        }
+      } else {
+        if (focusedHub && node.parentHub.id === focusedHub.id) {
+          alpha = 0.9;
+          scale = 1;
+        } else if (focusedHub) {
+          alpha = 0.15;
+          scale = 1;
+        } else {
+          alpha = 0.35;
+          scale = 1;
+        }
       }
 
-      if((hoverSkill === b || centerDist < 8) && b.name !== '') {
-        ctx.fillStyle = '#fff';
-        ctx.globalAlpha = 1;
-        ctx.font = `bold ${Math.max(8, 10 * scale + 4)}px sans-serif`;
-        ctx.textAlign = 'center';
-        const textY = drawY + r + (20 * scale);
-        ctx.fillText(b.name, drawX, textY);
-      }
+      drawNode(node, alpha, scale);
     });
 
     requestAnimationFrame(draw);
   }
 
-  draw();
+  preloadImages(() => draw());
 }
 
 function initFeaturedProjects(){
