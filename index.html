@@ -465,52 +465,58 @@ const PROJECTS = [
 const SKILLS_DATA = [
   {
     id: 'center',
-    label: 'Full Stack\nAI Engineer',
+    label: 'Full Stack AI Engineer',
     color: '#ffffff',
-    textColor: '#0a0a0a',
     emoji: '🧑‍💻',
-    skills: []
+    skills: [
+      { name: 'LLM Orchestration', emoji: '🧠' },
+      { name: 'Multi-Agent Systems', emoji: '🤖' },
+      { name: 'End-to-End ML', emoji: '📊' },
+      { name: 'Full Stack Architecture', emoji: '🏗️' },
+      { name: 'Production Deployment', emoji: '🚀' },
+      { name: 'System Design', emoji: '⚙️' },
+    ]
   },
   {
     id: 'cloud',
-    label: 'Cloud &\nDevOps',
+    label: 'Cloud & DevOps',
     color: '#FF9900',
     emoji: '☁️',
     skills: [
-      { name: 'AWS Lambda',    emoji: 'λ'  },
-      { name: 'AWS EC2',       emoji: '⚙️' },
-      { name: 'AWS S3',        emoji: '🪣' },
-      { name: 'AWS API GW',    emoji: '🔀' },
-      { name: 'AWS Bedrock',   emoji: '🪨' },
-      { name: 'AWS DynamoDB',  emoji: '🗄️' },
+      { name: 'AWS Lambda', emoji: 'λ' },
+      { name: 'AWS EC2', emoji: '⚙️' },
+      { name: 'AWS S3', emoji: '🪣' },
+      { name: 'AWS API Gateway', emoji: '🔀' },
+      { name: 'AWS Bedrock', emoji: '🪨' },
+      { name: 'AWS DynamoDB', emoji: '🗄️' },
     ]
   },
   {
     id: 'frontend',
-    label: 'Web &\nFrontend',
+    label: 'Web & Frontend',
     color: '#61DAFB',
     emoji: '🎨',
     skills: [
-      { name: 'React',               emoji: '⚛️' },
-      { name: 'HTML5',               emoji: '🌐' },
-      { name: 'CSS',                 emoji: '🎨' },
-      { name: 'JavaScript',          emoji: '⚡' },
-      { name: 'GitHub Pages',        emoji: '📄' },
-      { name: 'Web Hosting',         emoji: '🚀' },
+      { name: 'React', emoji: '⚛️' },
+      { name: 'HTML5', emoji: '🌐' },
+      { name: 'CSS', emoji: '🎨' },
+      { name: 'JavaScript', emoji: '⚡' },
+      { name: 'GitHub Pages', emoji: '📄' },
+      { name: 'Web Hosting & Deployment', emoji: '🚀' },
     ]
   },
   {
     id: 'backend',
-    label: 'Backend\n& APIs',
+    label: 'Backend & APIs',
     color: '#a855f7',
     emoji: '⚙️',
     skills: [
-      { name: 'Python',              emoji: '🐍' },
-      { name: 'FastAPI',             emoji: '🚀' },
-      { name: 'Node.js',             emoji: '💚' },
-      { name: 'REST API Design',     emoji: '🔗' },
-      { name: 'Webhooks',            emoji: '🪝' },
-      { name: 'Render',              emoji: '🖥️' },
+      { name: 'Python', emoji: '🐍' },
+      { name: 'FastAPI', emoji: '🚀' },
+      { name: 'Node.js', emoji: '💚' },
+      { name: 'REST API Design', emoji: '🔗' },
+      { name: 'Webhook Architecture', emoji: '🪝' },
+      { name: 'Render', emoji: '🖥️' },
     ]
   },
   {
@@ -519,12 +525,12 @@ const SKILLS_DATA = [
     color: '#f472b6',
     emoji: '🤖',
     skills: [
-      { name: 'CrewAI',              emoji: '🤖' },
-      { name: 'Groq',                emoji: '⚡' },
-      { name: 'HuggingFace',         emoji: '🤗' },
-      { name: 'Prompt Engineering',  emoji: '✍️' },
-      { name: 'AI Orchestration',    emoji: '🧠' },
-      { name: 'LM Studio',           emoji: '🖥️' },
+      { name: 'CrewAI', emoji: '🤖' },
+      { name: 'Groq', emoji: '⚡' },
+      { name: 'HuggingFace', emoji: '🤗' },
+      { name: 'Prompt Engineering', emoji: '✍️' },
+      { name: 'AI Orchestration', emoji: '🧠' },
+      { name: 'LM Studio', emoji: '🖥️' },
     ]
   },
   {
@@ -533,26 +539,26 @@ const SKILLS_DATA = [
     color: '#f87171',
     emoji: '🗄️',
     skills: [
-      { name: 'SQL',                 emoji: '📊' },
-      { name: 'Firebase',            emoji: '🔥' },
-      { name: 'JSON Modeling',       emoji: '📋' },
-      { name: 'CRUD Operations',     emoji: '🔄' },
-      { name: 'Query Optimization',  emoji: '🔍' },
-      { name: 'HTTP / REST Calls',   emoji: '📡' },
+      { name: 'SQL', emoji: '📊' },
+      { name: 'Firebase', emoji: '🔥' },
+      { name: 'JSON Data Modeling', emoji: '📋' },
+      { name: 'CRUD Operations', emoji: '🔄' },
+      { name: 'Query Optimization', emoji: '🔍' },
+      { name: 'HTTP / REST Calls', emoji: '📡' },
     ]
   },
   {
     id: 'tools',
-    label: 'Tools &\nInfrastructure',
+    label: 'Tools & Infrastructure',
     color: '#34d399',
     emoji: '🛠️',
     skills: [
-      { name: 'Git / GitHub',        emoji: '🌿' },
-      { name: 'VS Code',             emoji: '💻' },
-      { name: 'Claude Code',         emoji: '🤖' },
-      { name: 'Tableau',             emoji: '📊' },
-      { name: 'Docker',              emoji: '🐳' },
-      { name: 'Postman',             emoji: '📮' },
+      { name: 'Git / GitHub', emoji: '🌿' },
+      { name: 'VS Code / Antigravity', emoji: '💻' },
+      { name: 'Claude Code', emoji: '🤖' },
+      { name: 'Tableau', emoji: '📊' },
+      { name: 'Docker', emoji: '🐳' },
+      { name: 'Postman', emoji: '📮' },
     ]
   },
 ];
@@ -572,6 +578,8 @@ const skillImages = {
   'Groq': './images/Groq.png',
   'HuggingFace': './images/HuggingFace.png',
   'AI Orchestration': './images/AI_Orchestration.png',
+  'React': './images/React.png',
+  'Web Hosting & Deployment': './images/Render.png',
 };
 
 function initSkillsCanvas(){
