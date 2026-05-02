@@ -138,6 +138,9 @@ h1.name .w2{background:linear-gradient(110deg,var(--indigo) 0%,var(--cyan) 55%,v
 .proj-desc{color:var(--muted2);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.6;margin-bottom:16px;}
 .proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
 .proj-tag-code{display:inline-block;padding:4px 10px;background:rgba(34,211,238,.15);color:var(--cyan);border-radius:4px;font-size:10px;border:1px solid rgba(34,211,238,.3);}
+.proj-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--bdr);}
+.proj-code-block a{transition:all .2s;}
+.proj-code-block a:hover{opacity:.8;box-shadow:0 0 10px rgba(34,211,238,.3);}
 .proj-visual{display:flex;align-items:center;justify-content:center;min-height:300px;font-size:80px;line-height:1;}
 .proj-info h3{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;margin-bottom:8px;}
 .proj-info .proj-num{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
@@ -469,7 +472,7 @@ footer{border-top:1px solid var(--bdr);padding:40px 52px;text-align:center;max-w
 
 <script>
 const PROJECTS = [
-  {id:'mark-miller',num:'01',icon:'🏎️',featured:true,live:true,name:'Mark Miller Subaru',sub:'AI Lead Intelligence System',grad:'linear-gradient(135deg,#4f46e5,#0ea5e9)',sz:116,depth:4,desc:'Full-stack, two-agent AI system for real dealership operations. CrewAI pipeline scores leads, writes personalized emails, and triggers post-sale sequences.',tags:[['CrewAI','ti'],['FastAPI','tc'],['React','tg'],['Gemini 2.5','ta']]},
+  {id:'mark-miller',num:'01',icon:'🏎️',featured:true,live:true,name:'Mark Miller Subaru',sub:'AI Lead Intelligence System',grad:'linear-gradient(135deg,#4f46e5,#0ea5e9)',sz:116,depth:4,desc:'Full-stack, two-agent AI system for real dealership operations. CrewAI pipeline scores leads, writes personalized emails, and triggers post-sale sequences.',tags:[['CrewAI','ti'],['FastAPI','tc'],['React','tg'],['Gemini 2.5','ta']],links:[{label:'Customer Form',url:'https://rsokolowskydev.github.io/mark-miller-agent/customer-form/'},{label:'Dashboard',url:'https://rsokolowskydev.github.io/mark-miller-agent/dashboard/'}]},
   {id:'sentinel',num:'02',icon:'⚡',name:'Sentinel',sub:'AI Token Optimization Engine',grad:'linear-gradient(135deg,#06b6d4,#10b981)',sz:90,depth:2,desc:'Python orchestration system routing LLM queries to cut API costs without sacrificing accuracy. Dual-model validation catches hallucinations.',tags:[['Python','tc'],['LLM APIs','ti'],['Orchestration','tg']]},
   {id:'drone',num:'03',icon:'🚁',name:'Autonomous Drone System',sub:'Ground-Up Hardware Build',grad:'linear-gradient(135deg,#f59e0b,#ef4444)',sz:90,depth:1,desc:'Fully autonomous drone built from component selection to firmware-level integration. Custom Lua flight logic and C++ patches.',tags:[['ArduPilot','ta'],['C++','tc'],['Lua','tg']]},
   {id:'paint-matcher',num:'04',icon:'🎨',name:'AI Paint Color Matcher',sub:'Sensor → ML Inference',grad:'linear-gradient(135deg,#ec4899,#a855f7)',sz:90,depth:2,desc:'Engineering capstone: hardware color sensor feeds trained Create ML model to predict paint pigment mixing ratios in real time.',tags:[['Create ML','tc'],['Python','tg'],['Sensor','tp2']]},
@@ -890,6 +893,19 @@ function initFeaturedProjects(){
           ${proj.tags.map(t => `<div class="proj-code-line" style="padding-left:20px;"><span class="proj-code-str">"${t[0]}"</span>,</div>`).join('')}
           <div class="proj-code-line">]</div>
         </div>
+
+        ${proj.links ? `
+        <div class="proj-code-block">
+          <div class="proj-code-line"><span class="proj-code-key">links:</span> {</div>
+          ${proj.links.map(link => `<div class="proj-code-line" style="padding-left:20px;"><span class="proj-code-str">"${link.label}"</span>: <a href="${link.url}" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;border-bottom:1px solid var(--cyan);cursor:pointer;">"${link.url}"</a></div>`).join('')}
+          <div class="proj-code-line">}</div>
+        </div>
+
+        <div class="proj-actions">
+          ${proj.links.map(link => `<a href="${link.url}" target="_blank" rel="noopener" class="btn btn-p" style="font-size:10px;padding:8px 16px;">${link.label}</a>`).join('')}
+          <a href="https://github.com/RSokolowskyDev" target="_blank" rel="noopener" class="btn btn-g" style="font-size:10px;padding:8px 16px;">GitHub</a>
+        </div>
+        ` : ''}
       </div>
     </div>
   `).join('');
