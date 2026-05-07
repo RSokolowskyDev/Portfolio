@@ -478,7 +478,8 @@ const PROJECTS = [
   {id:'paint-matcher',num:'04',icon:'🎨',name:'AI Paint Color Matcher',sub:'Sensor → ML Inference',grad:'linear-gradient(135deg,#ec4899,#a855f7)',sz:90,depth:2,desc:'Engineering capstone: hardware color sensor feeds trained Create ML model to predict paint pigment mixing ratios in real time.',tags:[['Create ML','tc'],['Python','tg'],['Sensor','tp2']]},
   {id:'semantic-layer',num:'05',icon:'🧠',name:'Semantic Universe Layer',sub:'Transparent AI Reasoning',grad:'linear-gradient(135deg,#6366f1,#a855f7)',sz:90,depth:1,desc:'Glass-box semantic abstraction layer making AI reasoning fully interpretable and efficient on commodity hardware.',tags:[['AI Arch','ti'],['Python','tc']]},
   {id:'resumegen',num:'06',icon:'📄',name:'ResumeGen',sub:'Automated Resume Generation',grad:'linear-gradient(135deg,#10b981,#06b6d4)',sz:90,depth:2,desc:'Python tool that dynamically generates tailored resumes from JSON config, enabling modular swapping per application target.',tags:[['Python','tc'],['JSON','tg'],['PDF','tp2']]},
-  {id:'video-pipeline',num:'07',icon:'🎬',name:'Automated Video Pipeline',sub:'Batch Processing at Scale',grad:'linear-gradient(135deg,#8b5cf6,#ec4899)',sz:90,depth:1,desc:'Python/MoviePy batch pipeline automating video editing — cuts, captions, exports, encoding at scale.',tags:[['Python','tc'],['MoviePy','tg'],['FFmpeg','ta']]}
+  {id:'video-pipeline',num:'07',icon:'🎬',name:'Automated Video Pipeline',sub:'Batch Processing at Scale',grad:'linear-gradient(135deg,#8b5cf6,#ec4899)',sz:90,depth:1,desc:'Python/MoviePy batch pipeline automating video editing — cuts, captions, exports, encoding at scale.',tags:[['Python','tc'],['MoviePy','tg'],['FFmpeg','ta']]},
+  {id:'ai-router',num:'08',icon:'⚡',name:'AI Router',sub:'Free Provider API Gateway',grad:'linear-gradient(135deg,#f59e0b,#06b6d4)',sz:90,depth:2,desc:'OpenAI-compatible API gateway written in FastAPI that auto-routes requests across free AI providers (Groq, Cerebras, Gemini, SambaNova) with task classification, rate-limit tracking, and on-demand local llama.cpp fallback. Runs on a phone.',tags:[['FastAPI','tc'],['Python','tg'],['llama.cpp','ta'],['Groq','tp2']],links:[{label:'GitHub',url:'https://github.com/RSokolowskyDev/ai-router'}]}
 ];
 
 const SKILLS_DATA = [
@@ -945,7 +946,7 @@ function executeCommand(cmd){
   if(lower === 'help') return 'Available commands: whoami, skills, projects, experience, contact, status, hire, clear';
   if(lower === 'whoami') return 'Ryan Sokolowsky - AI Solutions & Automation Engineer, building intelligent systems from model layer to hardware.';
   if(lower === 'skills') return 'Python • JavaScript • AWS • React • CrewAI • FastAPI • ArduPilot • Machine Learning';
-  if(lower === 'projects') return '7 projects: Mark Miller Subaru AI, Sentinel, Autonomous Drone, Paint Matcher, Semantic Layer, ResumeGen, Video Pipeline';
+  if(lower === 'projects') return '8 projects: Mark Miller Subaru AI, Sentinel, Autonomous Drone, Paint Matcher, Semantic Layer, ResumeGen, Video Pipeline, AI Router';
   if(lower === 'experience') return '2025-now: UCCU • 2023-25: Missionary Lead • 2022-23: Fitness Manager • 2020-21: Code Ninjas Lead Instructor';
   if(lower === 'contact') return 'Email: ryan.sokolowsky@gmail.com | Phone: (331) 298-3934 | GitHub: github.com/RSokolowskyDev';
   if(lower === 'status') return '✓ Available for hire • Open to AI engineering & automation consulting';
